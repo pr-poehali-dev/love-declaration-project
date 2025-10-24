@@ -77,11 +77,13 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#f5f0e8] via-[#ebe4d8] to-[#e8dfd0] relative">
       <div 
         className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ${
-          isPlaying ? 'opacity-60 scale-105' : 'opacity-50 scale-100'
+          isPlaying ? 'opacity-100 scale-110' : 'opacity-50 scale-100'
         }`}
         style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/b275f3da-636f-497b-ac64-e1fccd26f026.jpg)' }}
       />
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className={`absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-1000 ${
+        isPlaying ? 'opacity-0' : 'opacity-100'
+      }`}>
         {[...Array(15)].map((_, i) => (
           <div
             key={i}
@@ -98,7 +100,9 @@ const Index = () => {
         ))}
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-16">
+      <div className={`relative z-10 container mx-auto px-4 py-16 transition-opacity duration-1000 ${
+        isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}>
         <section className="min-h-screen flex flex-col items-center justify-center text-center space-y-8 animate-fade-in-up">
           <h1 className="text-7xl md:text-9xl font-bold text-primary mb-4">
             Ты — моё всё
