@@ -20,27 +20,40 @@ const Index = () => {
     },
   ];
 
-  const togglePlay = () => {
+  const togglePlay = async () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
-        audioRef.current.play();
+        try {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        } catch (error) {
+          console.error('Ошибка воспроизведения:', error);
+          setIsPlaying(false);
+        }
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
-  const playTrack = (index: number) => {
-    setCurrentTrack(index);
-    setIsPlaying(false);
-    setTimeout(() => {
-      if (audioRef.current) {
-        audioRef.current.load();
-        audioRef.current.play();
+  const playTrack = async (index: number) => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      setCurrentTrack(index);
+      setIsPlaying(false);
+      
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
+      audioRef.current.load();
+      try {
+        await audioRef.current.play();
         setIsPlaying(true);
+      } catch (error) {
+        console.error('Ошибка загрузки трека:', error);
+        setIsPlaying(false);
       }
-    }, 100);
+    }
   };
 
   const galleryPhotos = [
