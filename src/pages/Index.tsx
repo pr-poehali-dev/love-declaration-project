@@ -14,7 +14,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFDEE2] via-[#E5DEFF] to-[#FDE1D3]">
+    <div className="min-h-screen bg-gradient-to-br from-[#f5f0e8] via-[#ebe4d8] to-[#e8dfd0]">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(15)].map((_, i) => (
           <div
