@@ -16,7 +16,7 @@ const Index = () => {
       title: 'Признание в чувствах', 
       artist: 'Для тебя', 
       duration: '3:45',
-      url: 'https://disk.yandex.ru/d/P0LlFW6AfUVfxw'
+      url: 'https://media.vocaroo.com/mp3/1kEVKVHGpMI1'
     },
   ];
 
