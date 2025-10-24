@@ -24,6 +24,12 @@ const Index = () => {
       duration: '4:12',
       url: 'https://media.vocaroo.com/mp3/17uASs72c0Eg'
     },
+    { 
+      title: 'Третья песня', 
+      artist: 'С любовью', 
+      duration: '3:58',
+      url: 'https://media.vocaroo.com/mp3/1enB4SfNryJW'
+    },
   ];
 
   const togglePlay = async () => {
