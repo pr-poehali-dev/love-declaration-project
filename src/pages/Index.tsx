@@ -12,18 +12,35 @@ const Index = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const playlist = [
-    { title: 'Моя первая песня', artist: 'Для тебя', duration: '3:24' },
-    { title: 'Вторая мелодия', artist: 'С любовью', duration: '4:12' },
-    { title: 'Третий трек', artist: 'От сердца', duration: '3:45' },
+    { 
+      title: 'Признание в чувствах', 
+      artist: 'Для тебя', 
+      duration: '3:45',
+      url: 'https://drive.google.com/uc?export=download&id=1A1vOcCCziD0U3In_CEDx_w_JEi8mW_ta'
+    },
   ];
 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying);
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
 
   const playTrack = (index: number) => {
     setCurrentTrack(index);
-    setIsPlaying(true);
+    setIsPlaying(false);
+    setTimeout(() => {
+      if (audioRef.current) {
+        audioRef.current.load();
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
+    }, 100);
   };
 
   const galleryPhotos = [
@@ -307,6 +324,15 @@ const Index = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      <audio 
+        ref={audioRef}
+        onEnded={() => setIsPlaying(false)}
+        onPause={() => setIsPlaying(false)}
+        onPlay={() => setIsPlaying(true)}
+      >
+        <source src={playlist[currentTrack].url} type="audio/mpeg" />
+      </audio>
     </div>
   );
 };
