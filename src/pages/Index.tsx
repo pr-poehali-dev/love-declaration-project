@@ -16,7 +16,7 @@ const Index = () => {
       title: 'Признание в чувствах', 
       artist: 'Для тебя', 
       duration: '3:45',
-      url: 'https://drive.google.com/uc?export=download&id=1A1vOcCCziD0U3In_CEDx_w_JEi8mW_ta'
+      url: 'https://disk.yandex.ru/d/P0LlFW6AfUVfxw'
     },
   ];
 
