@@ -18,6 +18,12 @@ const Index = () => {
       duration: '3:45',
       url: 'https://media.vocaroo.com/mp3/1kEVKVHGpMI1'
     },
+    { 
+      title: 'Вторая песня', 
+      artist: 'От сердца', 
+      duration: '4:12',
+      url: 'https://media.vocaroo.com/mp3/17uASs72c0Eg'
+    },
   ];
 
   const togglePlay = async () => {
