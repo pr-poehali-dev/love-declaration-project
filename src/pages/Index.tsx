@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -7,6 +7,24 @@ import Icon from '@/components/ui/icon';
 const Index = () => {
   const [showLetter, setShowLetter] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const playlist = [
+    { title: 'Моя первая песня', artist: 'Для тебя', duration: '3:24' },
+    { title: 'Вторая мелодия', artist: 'С любовью', duration: '4:12' },
+    { title: 'Третий трек', artist: 'От сердца', duration: '3:45' },
+  ];
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const playTrack = (index: number) => {
+    setCurrentTrack(index);
+    setIsPlaying(true);
+  };
 
   const galleryPhotos = [
     'https://cdn.poehali.dev/projects/e7a9730d-fe78-4f96-b4fc-2e6887094184/files/5fb5b2be-6e05-4e9b-af9c-7365ca13e561.jpg',
@@ -16,7 +34,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f5f0e8] via-[#ebe4d8] to-[#e8dfd0] relative">
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-50"
+        className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ${
+          isPlaying ? 'opacity-60 scale-105' : 'opacity-50 scale-100'
+        }`}
         style={{ backgroundImage: 'url(https://cdn.poehali.dev/files/b275f3da-636f-497b-ac64-e1fccd26f026.jpg)' }}
       />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -81,6 +101,97 @@ const Index = () => {
                   Загрузить видео
                 </Button>
               </div>
+            </div>
+          </Card>
+        </section>
+
+        <section className="py-20 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <Card className="max-w-4xl mx-auto p-8 bg-white/80 backdrop-blur-sm shadow-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <Icon name="Music" size={32} className="text-primary" />
+                <h2 className="text-4xl font-bold text-primary">Мои песни для тебя</h2>
+              </div>
+            </div>
+            
+            <div className="bg-muted/50 rounded-xl p-6 mb-6">
+              <div className="flex items-center gap-6">
+                <div className={`w-24 h-24 bg-primary/20 rounded-lg flex items-center justify-center ${
+                  isPlaying ? 'animate-pulse' : ''
+                }`}>
+                  <Icon name="Music2" size={48} className="text-primary" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-foreground mb-1">
+                    {playlist[currentTrack].title}
+                  </h3>
+                  <p className="text-muted-foreground text-lg">{playlist[currentTrack].artist}</p>
+                  <div className="mt-3 bg-muted rounded-full h-2 overflow-hidden">
+                    <div className="bg-primary h-full w-1/3 transition-all duration-300"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center gap-6 mt-6">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-12 w-12"
+                  onClick={() => playTrack(currentTrack > 0 ? currentTrack - 1 : playlist.length - 1)}
+                >
+                  <Icon name="SkipBack" size={24} />
+                </Button>
+                
+                <Button
+                  size="icon"
+                  className="h-16 w-16 rounded-full bg-primary hover:bg-primary/90"
+                  onClick={togglePlay}
+                >
+                  {isPlaying ? (
+                    <Icon name="Pause" size={32} className="text-primary-foreground" />
+                  ) : (
+                    <Icon name="Play" size={32} className="text-primary-foreground" />
+                  )}
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-12 w-12"
+                  onClick={() => playTrack(currentTrack < playlist.length - 1 ? currentTrack + 1 : 0)}
+                >
+                  <Icon name="SkipForward" size={24} />
+                </Button>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              {playlist.map((track, index) => (
+                <div
+                  key={index}
+                  onClick={() => playTrack(index)}
+                  className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-all ${
+                    currentTrack === index
+                      ? 'bg-primary/20 border-2 border-primary'
+                      : 'bg-muted/30 hover:bg-muted/50'
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-primary/30 rounded flex items-center justify-center">
+                      {currentTrack === index && isPlaying ? (
+                        <Icon name="Volume2" size={20} className="text-primary animate-pulse" />
+                      ) : (
+                        <span className="text-primary font-bold">{index + 1}</span>
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground">{track.title}</p>
+                      <p className="text-sm text-muted-foreground">{track.artist}</p>
+                    </div>
+                  </div>
+                  <span className="text-muted-foreground">{track.duration}</span>
+                </div>
+              ))}
             </div>
           </Card>
         </section>
