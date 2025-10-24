@@ -82,15 +82,52 @@ const Index = () => {
         </section>
 
         <section className="py-20 text-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-          <div className="max-w-2xl mx-auto space-y-6">
-            <Icon name="Sparkles" size={48} className="mx-auto text-primary animate-pulse" />
-            <h3 className="text-4xl font-bold text-primary">
-              С каждым днём я люблю тебя всё больше
-            </h3>
-            <p className="text-xl text-primary-foreground">
-              Спасибо, что ты есть в моей жизни. Ты — мой свет, моя радость, моя любовь.
-            </p>
-          </div>
+          <Card className="max-w-3xl mx-auto p-12 bg-white/90 backdrop-blur-sm shadow-2xl">
+            <Icon name="Feather" size={48} className="mx-auto text-primary mb-8 animate-pulse" />
+            <div className="space-y-6 text-left leading-relaxed">
+              <p className="text-xl text-foreground italic">
+                Твои глаза горят игриво,<br />
+                Лаская жадно небосвод,<br />
+                Своей улыбкою счастливой,<br />
+                Меня уносишь от невзгод.
+              </p>
+              <p className="text-xl text-foreground italic">
+                В тебе, ликуя, Афродита,<br />
+                Превносит в жизнь мою фурор,<br />
+                Одежда вишнями расшита,<br />
+                Дополнив красками узор.
+              </p>
+              <p className="text-xl text-foreground italic">
+                И весело волной струится,<br />
+                Твой голос звонкий на ветру,<br />
+                Прогнать скорее он стремится,<br />
+                Долой осеннюю хандру.
+              </p>
+              <p className="text-xl text-foreground italic">
+                Сокрою тайное желанье,<br />
+                Замок повешу на груди,<br />
+                Чернил исчезнет след признанья,<br />
+                В тетради, что я возводил.
+              </p>
+              <p className="text-xl text-foreground italic">
+                Пускай в словах я не уверен,<br />
+                Не смел я в действиях своих,<br />
+                Но лишь тебе одной намерен,<br />
+                Чеканить рифмами я стих.
+              </p>
+              <p className="text-xl text-foreground italic">
+                Она быть может посмеётся,<br />
+                Но жизнь лишь нам одна дана,<br />
+                И ты, покуда сердце бьётся,<br />
+                Как воздуха глоток нужна..
+              </p>
+            </div>
+            <div className="mt-8 flex items-center justify-center gap-2">
+              <Icon name="Heart" size={24} className="text-primary" />
+              <Icon name="Heart" size={24} className="text-primary" />
+              <Icon name="Heart" size={24} className="text-primary" />
+            </div>
+          </Card>
         </section>
       </div>
 
